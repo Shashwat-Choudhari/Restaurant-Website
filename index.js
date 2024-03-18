@@ -16,7 +16,6 @@ const port = 3000;
 
 const db = new pg.Pool({
     connectionString: process.env.POSTGRES_URL + "?sslmode=require",
-    ssl: {rejectUnauthorized:false}
 });
 
 let cart = [];
