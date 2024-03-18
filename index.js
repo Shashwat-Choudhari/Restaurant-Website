@@ -5,20 +5,11 @@ import pg from "pg";
 const app = express();
 const port = 3000;
 
-// const db = new pg.Pool({
-//     user: "default",
-//     host: "ep-cool-cake-a4jdrciv-pooler.us-east-1.aws.neon.tech",
-//     database: "verceldb",
-//     password: "CUIv5flWnp 0c",
-//     port: 5432,
-//     ssl: {rejectUnauthorized:false}
-// });
+let cart = [];
 
 const db = new pg.Pool({
     connectionString: process.env.POSTGRES_URL + "?sslmode=require",
 });
-
-let cart = [];
 
 db.connect((err)=>{
     if(err)
