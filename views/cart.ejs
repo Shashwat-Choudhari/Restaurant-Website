@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&family=Rajdhani:wght@300&family=Space+Grotesk:wght@300..700&family=Whisper&display=swap" rel="stylesheet">
+    <title>Cart</title>
+</head>
+<body>
+    <div class="shadow">
+        <p class="heading2">Cart</p> 
+        <% if(locals.message){ %>
+            <h3><%= message %></h3>
+            <% if(message  == "Thank you for your Feedback."){ %>
+                <div class="horizontal">
+                    <form action="/menu" method="GET">
+                        <input type="submit" value="Menu" class="submit">
+                    </form>
+                </div>
+            <% }else{ %>
+                <hr>
+                <div class="feedback">
+                    <h3>Please add a review.</h3>
+                    <form action="/review" method="post" class="feedback">
+                        <input type="text" name="user" placeholder="Please Enter your name" class="user">
+                        <!-- <input type="text" name="review" placeholder="Write your Review" class="review"> -->
+                        <textarea name="review"  cols="75" rows="10" placeholder="Write you Review"></textarea>
+                        <input type="submit" class="submit" style="margin: 20px;">
+                    </form>
+                </div>
+            <% } %>
+        <% }else{ %>
+            <% if(items.length==0){ %>
+                <h3 style="text-align: center;">Cart is empty</h3>
+            <% }else{ %>
+            <div class="block1">
+                <% var totalPrice =0; for(var i=0;i<items.length;i++){ %>
+                    <div class="card">
+                        <img src="/<%= items[i].img_name %>" alt="image" height="100px" width="100px">
+                        <div style="text-align: center;"><%= items[i].item %></div>
+                        <div>Rs. <%= items[i].price %></div>
+                        <div>Rating: <% for(var j=0;j<items[i].rating;j++){%>⭐<%} %></div>
+                        <form action="/remove/<%= items[i].id %>" method="get">
+                            <input type="submit" value="Remove from Cart" class="addTocart">
+                        </form>
+                    </div>  
+                <% totalPrice  = totalPrice + items[i].price; } %>
+            <% } %>
+            </div>  
+            <% if(items.length!=0){ %>
+                <p>Total Order Price: <%= totalPrice %></p>
+            <% } %>
+            <div class="horizontal">
+                <% if(items.length!=0){ %>
+                    <form action="/order" method="GET">
+                        <input type="submit" value="Place Order" class="submit">
+                    </form>
+                <% } %>
+                <form action="/menu" method="GET">
+                    <input type="submit" value="Menu" class="submit">
+                </form>
+            </div> 
+        <% } %>
+    </div>
+</body>
+</html>

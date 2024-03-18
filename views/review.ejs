@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&family=Rajdhani:wght@300&family=Space+Grotesk:wght@300..700&family=Whisper&display=swap" rel="stylesheet">
+    <title>Reviews</title>
+</head>
+<body>
+    <div class="shadow">
+        <p class="heading2">Reviews</p>
+        <% for(var i=0;i<reviews.length;i++){ %>
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; border: 1px solid black; margin: 50px; margin-bottom: 5px; margin-top: 5px; border-radius: 5px; ">
+                <h3 style="text-align: left; margin-bottom: 5px;"><%= reviews[i].user_name %></h3>
+                <h5><%= reviews[i].review %></h5>
+            </div>
+            
+        <% } %>
+        <div class="horizontal">
+            <form action="/menu" method="GET">
+                <input type="submit" value="Menu" class="submit">
+            </form>
+        </div>
+
+    </div>
+    
+
+</body>
+</html>

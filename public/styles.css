@@ -1,0 +1,205 @@
+.heading{
+    text-align: center;
+    font-family: "Whisper", cursive;
+    font-size: 100px;
+    margin: 0px;
+}
+
+.description{
+    font-family: "Whisper", cursive;
+    font-size: larger;
+    margin-bottom: 50px;
+}
+
+.index{
+    background-image: url("/Restaurant5.jpg"); 
+    background-size: auto;
+}
+
+.heading2{
+    width: 100%;
+    text-align: center;
+    font-family: "Whisper", cursive;
+    font-size: 50px;
+    margin: 0px;
+}
+
+h3{
+    font-family: "Rajdhani", sans-serif;
+    text-align: center;
+}
+
+h5{
+    font-family: "Rajdhani", sans-serif;
+    margin: 0px;
+}
+
+p{
+    font-family: "Rajdhani", sans-serif;
+    text-align: center;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.footer{
+    font-family: "Rajdhani", sans-serif;
+
+}
+
+hr{
+    width: 75%;
+    border: solid none none none;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 2px;
+
+}
+
+
+.main{
+    display: flex;
+    flex-direction: row;
+    height: 95vh;
+    justify-content: start;
+    align-items: center;
+    margin: 0px;
+}
+
+.vertical{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin-left: 100px;
+    width: 500px;
+    color: white;
+    background: none;
+    border-radius: 10px;
+}
+
+.horizontal{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;    
+}
+
+.submit{
+    background-color: green;
+    padding: 5px;
+    color: white;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+    font-family: "Rajdhani", sans-serif;
+    font-weight: bolder;
+    font-size: larger;
+    cursor: pointer;
+    margin: 20px;
+    margin-left: 0px;
+}
+
+.home
+{
+    color: green;
+    margin-left: 50px;
+    height: 35px;
+    width: 35px;
+}
+
+.cart{
+    color: green;
+    margin-right: 50px;
+    height: 35px;
+    width: 35px;
+}
+
+
+.block{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    /* height: 100vh; */
+    border: 1px solid black;
+    border-top: none;
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px;
+    padding-bottom: 50px;
+    margin-bottom: 30px;
+
+}
+
+.block1{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin: 20px;    
+    padding: 0px;
+    padding-top: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 212px;
+    width: 190px;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px;
+    font-family: "Rajdhani", sans-serif;
+    font-weight: bolder;
+    cursor: default;
+
+}
+
+.shadow{
+    border: 1px solid black;
+    border-top: none;
+    border-radius: 10px;
+    box-shadow: 0px 5px 20px;
+}
+
+img{
+    margin: 10px;
+}
+
+.addTocart{
+    background-color: green;
+    padding: 5px;
+    margin-top: 5px;
+    color: white;
+    width: 190px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+    font-family: "Rajdhani", sans-serif;
+    font-weight: bolder;
+}
+
+.feedback{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+
+.user{
+    margin: 5px;
+    padding: 3px;
+    border: 1px double black;
+}
+
+.review{
+    margin: 5px;
+    padding: 3px;
+    border: 1px double black;
+    width: 500px;
+    height: 200px;
+}
