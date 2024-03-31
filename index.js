@@ -5,6 +5,9 @@ import pg from "pg";
 const app = express();
 const port = 3000;
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
 let cart = [];
 
 const db = new pg.Pool({
@@ -29,9 +32,6 @@ async function allItems()
     });
     return items;
 }
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
 
 app.get("/",(req,res)=>{
     res.render("index.ejs");
