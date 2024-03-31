@@ -27,6 +27,7 @@ async function allItems()
 {
     const result  = await db.query("SELECT * FROM items JOIN images ON images.item_id = id ORDER BY price");
     let items = [];
+    console.log(result.rows);
     result.rows.forEach((item)=>{
         items.push(item);
     });
