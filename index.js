@@ -57,6 +57,7 @@ app.post("/cart/:id",async (req,res)=>{
         try {
             const items = await allItems();
             res.render("menu.ejs",{items: items});
+            alert("Item added to cart");
         } catch (error) {
             console.log(error);        
         }
