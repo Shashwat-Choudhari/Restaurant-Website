@@ -20,7 +20,7 @@
         <% if(locals.items){ %>
         <% for(var i=0;i<items.length;i++){ %>
             <div class="card">
-                <img src="/<%= items[i].filepath %>" alt="<% items[i].item %>" height="100px" width="100px">
+                <img src="https://restaurant-website-jud2.onrender.com/<%= items[i].filepath %>" alt="<% items[i].item %>" height="100px" width="100px">
                 <div style="text-align: center;"><%= items[i].item %></div>
                 <div>Rs. <%= items[i].price %></div>
                 <div>Rating: <% for(var j=0;j<items[i].rating;j++){%>⭐<%} %></div>
