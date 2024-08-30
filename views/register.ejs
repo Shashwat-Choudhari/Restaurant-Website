@@ -14,11 +14,15 @@
     <div class="shadow">
         <div class="feedback">
             <p class="heading2">Register</p>
-            <form action="/register" method="POST">
+            <form action="/user/register" method="POST">
                   <label for="email">Email</label>
-                  <input type="email" class="user" name="username">
+                  <input type="email" class="user" name="email">
+                  <label for="username">Username</label>
+                  <input type="text" class="user" name="username">
                   <label for="password">Password</label>
                   <input type="password" class="user" name="password">
+                  <label for="phone">Phone</label>
+                  <input type="text" class="user" name="phone">
                 <button type="submit" class="submit">Register</button>
               </form>
         </div>

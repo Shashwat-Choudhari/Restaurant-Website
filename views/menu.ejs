@@ -17,9 +17,10 @@
             <p class="heading2">Menu</p> 
             <a href="/cart"><img src="/cart.svg" alt="Cart" class="cart"></a>
         </div>
+        <% if(locals.items){ %>
         <% for(var i=0;i<items.length;i++){ %>
             <div class="card">
-                <img src="/<%= items[i].img_name %>" alt="image" height="100px" width="100px">
+                <img src="/<%= items[i].filepath %>" alt="<% items[i].item %>" height="100px" width="100px">
                 <div style="text-align: center;"><%= items[i].item %></div>
                 <div>Rs. <%= items[i].price %></div>
                 <div>Rating: <% for(var j=0;j<items[i].rating;j++){%>⭐<%} %></div>
@@ -28,6 +29,7 @@
                 </form>
             </div>  
         <% } %> 
+        <% } %>
     </div>
     <form action="/reviews" method="get">
         <input type="submit" value="Reviews" class="submit">

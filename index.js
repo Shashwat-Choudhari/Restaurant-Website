@@ -1,51 +1,39 @@
 import express from "express";
 import bodyParser from "body-parser";
-import pg from "pg";
-import bcrypt from "bcrypt";
+import cors from 'cors';
+import dotenv from "dotenv";
+import path from "path";
+import { db } from "./config/db.js";
+import { userRouter } from "./routes/user.js";
+import { menuRouter } from "./routes/menu.js";
+dotenv.config();
+
 
 const app = express();
 const port = 3000;
-const saltRounds = 10;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static('uploads'));
+app.use(cors());
+app.use(express.json());
 
 let cart = [];
-
-const db = new pg.Pool({
-    connectionString: process.env.POSTGRES_URL + "?sslmode=require",
-});
 
 db.connect((err) => {
     if (err) {
         console.log(err);
     }
     else
-        console.log("Connected to Postgres succesfully !!");
+        console.log("Database connected");
 });
-
-async function allItems() {
-    const result = await db.query("SELECT * FROM items JOIN images ON images.item_id = id ORDER BY price");
-    let items = [];
-    console.log(result.rows);
-    result.rows.forEach((item) => {
-        items.push(item);
-    });
-    return items;
-}
 
 app.get("/", (req, res) => {
     res.render("index.ejs");
 });
 
-app.get("/menu", async (req, res) => {
-    try {
-        const items = await allItems();
-        res.render("menu.ejs", { items: items });
-    } catch (error) {
-        console.log(error);
-    }
-});
+app.use("/user", userRouter);
+app.use("/menu", menuRouter);
+
 
 app.post("/cart/:id", async (req, res) => {
     const id = parseInt(req.params.id);
@@ -109,84 +97,6 @@ app.get("/reviews", async (req, res) => {
         res.render("review.ejs", { reviews: reviews });
     } catch (error) {
         console.log(error);
-    }
-});
-
-app.get("/login", (req, res) => {
-    res.render("login.ejs");
-});
-
-app.get("/register", (req, res) => {
-    res.render("register.ejs");
-});
-
-app.post("/register", async (req, res) => {
-    const email = req.body.username;
-    const password = req.body.password;
-
-    try {
-        const checkResult = await db.query("SELECT * FROM users WHERE email = $1", [email]);
-
-        if (checkResult.rows.length > 0) {
-            res.send("Email already exists. Try logging in.");
-        } else {
-            bcrypt.hash(password, saltRounds, async (err, hash)=>{
-                if(err){
-                    console.log("Error Hashing password: ",err);
-                }
-                else{
-                    const result = await db.query(
-                        "INSERT INTO users (email, password) VALUES ($1, $2)",
-                        [email, hash]
-                    );
-                    try {
-                        const items = await allItems();
-                        res.render("menu.ejs", { items: items });
-                    } catch (error) {
-                        console.log(error);
-                    }
-                }
-            });
-        }
-    } catch (err) {
-        console.log(err);
-    }
-});
-
-app.post("/login", async (req, res) => {
-    const email = req.body.email;
-    const loginPassword = req.body.password;
-
-    try {
-        const result = await db.query("SELECT * FROM users WHERE email = $1", [email]);
-        if (result.rows.length > 0) {
-            const user = result.rows[0];
-            const storedHash = user.password;
-
-            bcrypt.compare(loginPassword, storedHash, async (err, result)=>{
-                if(err){
-                    console.log("Error comparing: ",err);
-                }
-                else{
-                    if(result)
-                    {
-                        try {
-                            const items = await allItems();
-                            res.render("menu.ejs", { items: items });
-                        } catch (error) {
-                            console.log(error);
-                        }
-                    }
-                    else{
-                        res.send("Incorrect Password");
-                    }
-                }
-            });
-        } else {
-            res.send("User not found");
-        }
-    } catch (err) {
-        console.log(err);
     }
 });
 
