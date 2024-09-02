@@ -12,11 +12,11 @@
 <body>
     <div class="shadow">
         <p class="heading2">Cart</p> 
-        <% if(locals.message){ %>
+        <% if(locals.message && locals.user_id){ %>
             <h3><%= message %></h3>
             <% if(message  == "Thank you for your Feedback."){ %>
                 <div class="horizontal">
-                    <form action="/menu" method="GET">
+                    <form action="/menu/get-all-items/<%= user_id %>" method="GET">
                         <input type="submit" value="Menu" class="submit">
                     </form>
                 </div>
@@ -24,7 +24,7 @@
                 <hr>
                 <div class="feedback">
                     <h3>Please add a review.</h3>
-                    <form action="/review" method="post" class="feedback">
+                    <form action="/review/add-review/<%= user_id %>" method="post" class="feedback">
                         <input type="text" name="user" placeholder="Please Enter your name" class="user">
                         <!-- <input type="text" name="review" placeholder="Write your Review" class="review"> -->
                         <textarea name="review"  cols="75" rows="10" placeholder="Write you Review"></textarea>
@@ -32,22 +32,22 @@
                     </form>
                 </div>
             <% } %>
-        <% }else{ %>
+        <% }else if(locals.items && locals.user_id){ %>
             <% if(items.length==0){ %>
                 <h3 style="text-align: center;">Cart is empty</h3>
             <% }else{ %>
             <div class="block1">
                 <% var totalPrice =0; for(var i=0;i<items.length;i++){ %>
                     <div class="card">
-                        <img src="/<%= items[i].img_name %>" alt="image" height="100px" width="100px">
+                        <img src="/<%= items[i].filename %>" alt="image" height="100px" width="100px">
                         <div style="text-align: center;"><%= items[i].item %></div>
                         <div>Rs. <%= items[i].price %></div>
-                        <div>Rating: <% for(var j=0;j<items[i].rating;j++){%>⭐<%} %></div>
-                        <form action="/remove/<%= items[i].id %>" method="get">
+                        <div>Quantity: <%= items[i].quantity  %></div>
+                        <form action="/cart/remove/<%= items[i].item_id %>/<%= user_id %>" method="get">
                             <input type="submit" value="Remove from Cart" class="addTocart">
                         </form>
                     </div>  
-                <% totalPrice  = totalPrice + items[i].price; } %>
+                <% totalPrice  = totalPrice + (items[i].price*items[i].quantity); } %>
             <% } %>
             </div>  
             <% if(items.length!=0){ %>
@@ -55,11 +55,11 @@
             <% } %>
             <div class="horizontal">
                 <% if(items.length!=0){ %>
-                    <form action="/order" method="GET">
+                    <form action="/order/cart-to-order/<%= items[0].cart_id %>/<%= user_id %>" method="POST">
                         <input type="submit" value="Place Order" class="submit">
                     </form>
                 <% } %>
-                <form action="/menu" method="GET">
+                <form action="/menu/get-all-items/<%= user_id %>" method="GET">
                     <input type="submit" value="Menu" class="submit">
                 </form>
             </div> 

@@ -5,15 +5,15 @@ import formidable from "formidable";
 export const menuRouter = express.Router();
 import fs from "fs";
 
-menuRouter.get("/get-all-items", async (req, res) => {
+menuRouter.get("/get-all-items/:user_id", async (req, res) => {
+    const user_id = parseInt(req.params.user_id);
     try {
         const result = await db.query("SELECT * FROM items i JOIN item_images ii ON ii.item_id = i.id ORDER BY price");
         let items = [];
-        console.log(result.rows);
         result.rows.forEach((item) => {
             items.push(item);
         });
-        res.render("menu.ejs", { items: items });
+        res.render("menu.ejs", { items: items, user_id: user_id });
     } catch (error) {
         console.log(error);
     }

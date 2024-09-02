@@ -10,6 +10,7 @@
     <title>Reviews</title>
 </head>
 <body>
+    <% if(locals.reviews && locals.user_id){%>
     <div class="shadow">
         <p class="heading2">Reviews</p>
         <% for(var i=0;i<reviews.length;i++){ %>
@@ -20,10 +21,11 @@
             
         <% } %>
         <div class="horizontal">
-            <form action="/menu" method="GET">
+            <form action="/menu/get-all-items/<%= user_id %>" method="GET">
                 <input type="submit" value="Menu" class="submit">
             </form>
         </div>
+        <% } %>
 
     </div>
     

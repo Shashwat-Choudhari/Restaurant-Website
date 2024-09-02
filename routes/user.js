@@ -91,7 +91,7 @@ userRouter.post("/login", async (req, res) => {
                 result.rows.forEach((item) => {
                     items.push(item);
                 });
-                res.status(200).render("menu.ejs",{items: items });
+                res.status(200).render("menu.ejs",{items: items , user_id : existUser.id});
             } catch (error) {
                 console.log(error);
             }

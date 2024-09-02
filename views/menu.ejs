@@ -15,24 +15,26 @@
         <div class="horizontal" style="width: 100%;">
             <a href="/"><img src="/home.svg" alt="Home" class="home"></a>
             <p class="heading2">Menu</p> 
-            <a href="/cart"><img src="/cart.svg" alt="Cart" class="cart"></a>
+            <% if(locals.user_id){ %><a href="/cart/go-to-cart/<%= user_id %>"><img src="/cart.svg" alt="Cart" class="cart"></a><% } %>
         </div>
-        <% if(locals.items){ %>
+        <% if(locals.items && locals.user_id){ %>
         <% for(var i=0;i<items.length;i++){ %>
             <div class="card">
                 <img src="/<%= items[i].filename %>" alt="<% items[i].item %>" height="100px" width="100px">
                 <div style="text-align: center;"><%= items[i].item %></div>
                 <div>Rs. <%= items[i].price %></div>
                 <div>Rating: <% for(var j=0;j<items[i].rating;j++){%>⭐<%} %></div>
-                <form action="/cart/<%= items[i].id %>" method="post">
+                <form action="/cart/add-to-cart/<%= items[i].item_id %>/<%= user_id %>" method="post">
                     <input type="submit" value="Add to Cart" class="addTocart">
                 </form>
             </div>  
         <% } %> 
         <% } %>
     </div>
-    <form action="/reviews" method="get">
+    <% if(locals.user_id){%>
+    <form action="/review/reviews/<%= user_id %>" method="get">
         <input type="submit" value="Reviews" class="submit">
     </form>
+    <% } %>
 </body>
 </html>
