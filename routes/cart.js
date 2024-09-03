@@ -153,7 +153,7 @@ cartRouter.get("/remove/:id/:user_id", async (req, res) => { // Change method to
             JOIN 
                 carts c ON ci.cart_id = c.id
             WHERE 
-            c.user_id = $1;
+            ci.cart_id = $1;
         `, [cartId]);
         // Prepare items array
         let cart_items = []; // Use the rows directly as the items array
