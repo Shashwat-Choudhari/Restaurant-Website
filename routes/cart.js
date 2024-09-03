@@ -84,7 +84,7 @@ cartRouter.get("/go-to-cart/:user_id", async (req, res) => {
             JOIN 
                 carts c ON ci.cart_id = c.id
             WHERE 
-            c.user_id = $1;
+            ci.cart_id = $1;
         `, [cart_id]);
         // Prepare items array
         let cart_items = []; // Use the rows directly as the items array
