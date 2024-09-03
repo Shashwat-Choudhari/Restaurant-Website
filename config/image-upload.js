@@ -1,10 +1,10 @@
 import multer from "multer";
 import path from "path";
 
-// Set up the storage configuration
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/'); // 'uploads/' is the directory where the images will be stored
+        cb(null, 'uploads/');
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -12,11 +12,11 @@ const storage = multer.diskStorage({
     }
 });
 
-// Create the multer upload instance
+
 export const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 1024 * 1024 * 5 // Limit file size to 5MB
+        fileSize: 1024 * 1024 * 5 
     },
     fileFilter: function (req, file, cb) {
         const filetypes = /jpeg|jpg|png/;
